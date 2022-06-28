@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="form-group">
+    <!-- <label for="name"> Name </label>
+    <input id="name" type="text" [(ngModel)]="student.name" /> -->
+    <kendo-label [for]="name" text="Name"> </kendo-label>
+    <kendo-textbox
+  #name id="name"
+      [clearButton]="true" [value]="studObj.name"
+    ></kendo-textbox>
+  </div>
+  <br>
+  <div class="form-group">
+    <!-- <label for="email"> Email </label>
+    <input id="email" type="text" [(ngModel)]="student.email" /> -->
+    <kendo-label [for]="email" text="Email"> </kendo-label>
+    <kendo-textbox
+  #email id="email"
+      [clearButton]="true" [value]="studObj.email"
+    ></kendo-textbox>
+  </div>
+  <br>
+  <div class="form-group">
+    <kendo-label [for]="dob" text="Date of Birth"> </kendo-label>
+    <kendo-datepicker id="dob" #dob [format]="format" [disabledDates]="disabledDates" [value]="dateOfBirth"></kendo-datepicker>
+  </div>
+  <br>
+  <button class="btn btn-warning" (click)="updateStudent(name,email,dob)">Update</button>
+</div>

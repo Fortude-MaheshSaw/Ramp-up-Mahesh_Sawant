@@ -1,0 +1,13 @@
+.container {
+  margin: 100px;
+}
+
+.operation_panel {
+  min-width: 500px;
+  display: flex;
+  justify-content: center;
+}
+button {
+  width: 75px;
+  margin: 5px;
+}

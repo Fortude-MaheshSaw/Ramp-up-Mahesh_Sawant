@@ -1,0 +1,29 @@
+<br />
+<div class="container form">
+  <div class="form-group">
+    <kendo-label [for]="name" text="Name"> </kendo-label>
+    <kendo-textbox #name id="name" [clearButton]="true"></kendo-textbox>
+  </div>
+  <br />
+  <div class="form-group">
+    <kendo-label [for]="email" text="Email"> </kendo-label>
+    <kendo-textbox #email id="email" [clearButton]="true"></kendo-textbox>
+  </div>
+  <br />
+  <div class="form-group">
+    <kendo-label [for]="dob" text="Date of Birth"> </kendo-label>
+    <kendo-datepicker
+      #dob
+      id="dob"
+      [disabledDates]="disabledDates"
+    ></kendo-datepicker>
+  </div>
+  <br /><br />
+  <button
+    class="btn btn-success"
+    style="width: 60px"
+    (click)="addRecord(name.value, email.value, dob.value)"
+  >
+    Add
+  </button>
+</div>

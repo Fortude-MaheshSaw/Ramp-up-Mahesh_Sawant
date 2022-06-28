@@ -1,0 +1,114 @@
+<div class="container">
+  <kendo-upload
+    [saveUrl]="uploadSaveUrl"
+    [removeUrl]="removeUrl"
+    (remove)="remove($event)"
+    [multiple]="false"
+    [autoUpload]="false"
+    actionsLayout="end"
+    [restrictions]="myRestrictions"
+    [(ngModel)]="myFiles"
+  >
+  </kendo-upload>
+
+  <kendo-grid
+    [data]="gridView"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [pageable]="true"
+    (pageChange)="pageChange($event)"
+  >
+    <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
+    <kendo-grid-column field="email" title="Email"></kendo-grid-column>
+    <kendo-grid-column field="dob" title="Date of Birth">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.dob | date: "dd/MM/yyyy" }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="age" title="Age"> </kendo-grid-column>
+    <kendo-grid-column>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button
+          kendoButton
+          (click)="editRecord(popUpdate, dataItem)"
+          class="btn btn-warning"
+        >
+          Edit
+        </button>
+        <button
+          kendoButton
+          (click)="deleteRecord(dataItem)"
+          class="btn btn-danger"
+        >
+          Delete
+        </button>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+  <br />
+
+  <ng-template #popUpdate>
+    <app-edit-record [studObj]="student"></app-edit-record>
+    <div>
+      <a
+        (click)="closePopup()"
+        class="btn btn-danger"
+        style="margin: 12px; width: 78px"
+        >close</a
+      >
+    </div>
+  </ng-template>
+
+  <ng-template #popUpAdd>
+    <app-add-record></app-add-record>
+    <div>
+      <a (click)="closePopup()" class="btn btn-danger" style="margin: 12px"
+        >close</a
+      >
+    </div>
+  </ng-template>
+
+  <kendo-buttongroup class="operation_panel">
+    <button kendoButton class="btn btn-success" style="width: 200px;" (click)="addRecord(popUpAdd)">
+      Add Record
+    </button>
+  </kendo-buttongroup>
+</div>
+
+<kendo-dialog
+  title="Please confirm"
+  *ngIf="opened"
+  (close)="closeDialog('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center">
+    Are you sure to delete this record?
+  </p>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="closeDialog('no')">No</button>
+    <button kendoButton (click)="closeDialog('yes')" themeColor="primary">
+      Yes
+    </button>
+  </kendo-dialog-actions>
+</kendo-dialog>
+
+<kendo-dialog
+  title="Please confirm"
+  *ngIf="openConfirmation"
+  (close)="closeDialog('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center">
+    File and records related to the file will be removed. <br>
+    Do you want to continue?
+  </p>
+  <kendo-dialog-actions >
+    <button kendoButton (click)="closeDialog('no')">No</button>
+    <button kendoButton (click)="closeDialog('deleteAll')" themeColor="primary">
+      Yes
+    </button>
+  </kendo-dialog-actions>
+</kendo-dialog>
+
